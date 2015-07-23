@@ -16,6 +16,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise_token_auth'
 
+gem 'omniauth'
+
 gem 'rails_12factor', group: :production
 
 # Use ActiveModel has_secure_password
