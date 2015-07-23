@@ -19,18 +19,24 @@ ActiveRecord::Schema.define(version: 20150723154322) do
   create_table "comments", force: :cascade do |t|
     t.string   "text"
     t.integer  "rank"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "ideas", force: :cascade do |t|
     t.string   "title"
     t.integer  "rank"
     t.string   "description"
     t.string   "link"
+    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "ideas", ["user_id"], name: "index_ideas_on_user_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "text"
@@ -70,6 +76,7 @@ ActiveRecord::Schema.define(version: 20150723154322) do
   create_table "votes", force: :cascade do |t|
     t.boolean  "value"
     t.integer  "rank"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

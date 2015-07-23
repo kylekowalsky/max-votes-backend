@@ -5,6 +5,7 @@ class CreateIdeas < ActiveRecord::Migration
       t.integer :rank
       t.string :description
       t.string :link
+      t.belongs_to :user, index: true
 
       t.timestamps null: false
     end

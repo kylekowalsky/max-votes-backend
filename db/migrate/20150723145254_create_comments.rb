@@ -3,6 +3,7 @@ class CreateComments < ActiveRecord::Migration
     create_table :comments do |t|
       t.string :text
       t.integer :rank
+      t.belongs_to :user, index: true
 
       t.timestamps null: false
     end
