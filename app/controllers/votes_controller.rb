@@ -5,20 +5,19 @@ class VotesController < ApplicationController
   # GET /votes.json
   def index
     @votes = Vote.all
+    render json: @votes
   end
 
   # GET /votes/1
   # GET /votes/1.json
   def show
+    @vote = Vote.find(params[:id])
+    render json: @vote
   end
 
   # GET /votes/new
   def new
     @vote = Vote.new
-  end
-
-  # GET /votes/1/edit
-  def edit
   end
 
   # POST /votes

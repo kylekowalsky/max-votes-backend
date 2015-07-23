@@ -4,12 +4,21 @@ class IdeasController < ApplicationController
   # GET /ideas
   # GET /ideas.json
   def index
-    @ideas = Idea.all
+    if params[:tag_id]
+      @tag = Tag.find(params[:tag_id])
+      @ideas = @tag.ideas
+    else
+      @ideas = Idea.all
+    end
+
+    render json: @ideas
   end
 
   # GET /ideas/1
   # GET /ideas/1.json
   def show
+    @idea = Idea.find(params[:id])
+    render json: @idea
   end
 
   # GET /ideas/new
@@ -42,7 +51,7 @@ class IdeasController < ApplicationController
   def update
     respond_to do |format|
       if @idea.update(idea_params)
-        format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
+        format.html { redirect_to @idea, notice: 'Idea was updated.' }
         format.json { render :show, status: :ok, location: @idea }
       else
         format.html { render :edit }
@@ -56,7 +65,7 @@ class IdeasController < ApplicationController
   def destroy
     @idea.destroy
     respond_to do |format|
-      format.html { redirect_to ideas_url, notice: 'Idea was successfully destroyed.' }
+      format.html { redirect_to ideas_url, notice: 'Idea was deleted.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +78,6 @@ class IdeasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def idea_params
-      params.require(:idea).permit(:title, :rank, :description, :link)
+      params.require(:idea).permit(:title, :description, :link)
     end
 end

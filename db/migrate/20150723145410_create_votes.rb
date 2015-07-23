@@ -4,6 +4,8 @@ class CreateVotes < ActiveRecord::Migration
       t.boolean :value
       t.integer :rank
       t.belongs_to :user
+      t.belongs_to :idea
+      t.belongs_to :comment
 
       t.timestamps null: false
     end

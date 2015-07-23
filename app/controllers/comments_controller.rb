@@ -4,12 +4,21 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    if params[:idea_id]
+      @idea = Idea.find(params[:idea_id])
+      @comments = @idea.comments
+    else
+      @comments = Comment.all
+    end
+
+    render json: @comments.as_json
   end
 
   # GET /comments/1
   # GET /comments/1.json
   def show
+    @comment = Idea.find(params[:id])
+    render json: @comment
   end
 
   # GET /comments/new

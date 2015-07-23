@@ -5,20 +5,19 @@ class TagsController < ApplicationController
   # GET /tags.json
   def index
     @tags = Tag.all
+    render json: @tags
   end
 
   # GET /tags/1
   # GET /tags/1.json
   def show
+    @tag = Tag.find(params[:id])
+    render json: @tag
   end
 
   # GET /tags/new
   def new
     @tag = Tag.new
-  end
-
-  # GET /tags/1/edit
-  def edit
   end
 
   # POST /tags
@@ -32,20 +31,6 @@ class TagsController < ApplicationController
         format.json { render :show, status: :created, location: @tag }
       else
         format.html { render :new }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /tags/1
-  # PATCH/PUT /tags/1.json
-  def update
-    respond_to do |format|
-      if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tag }
-      else
-        format.html { render :edit }
         format.json { render json: @tag.errors, status: :unprocessable_entity }
       end
     end

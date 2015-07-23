@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
-  resources :tags
-  resources :votes
-  resources :comments
-  resources :ideas
+
+  root 'ideas#index'
+
+  resources :users, only: [:show, :new, :create]
+  resources :ideas, only: [:index, :show, :new, :create]
+  resources :comments, only: [:index, :show, :new, :create]
+  resources :votes, only: [:edit, :update, :new, :create]
+  resources :tags, only: [:index, :show, :new, :create]
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -20,10 +20,13 @@ ActiveRecord::Schema.define(version: 20150723154322) do
     t.string   "text"
     t.integer  "rank"
     t.integer  "user_id"
+    t.integer  "idea_id"
+    t.integer  "comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "comments", ["idea_id"], name: "index_comments_on_idea_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "ideas", force: :cascade do |t|
@@ -77,6 +80,8 @@ ActiveRecord::Schema.define(version: 20150723154322) do
     t.boolean  "value"
     t.integer  "rank"
     t.integer  "user_id"
+    t.integer  "idea_id"
+    t.integer  "comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
